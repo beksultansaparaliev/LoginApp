@@ -14,20 +14,20 @@ class AboutUserViewController: UIViewController {
     @IBOutlet weak var workLabel: UILabel!
     @IBOutlet weak var aboutMeLabel: UILabel!
     
-    var dataModel: User!
+    var user: User!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        nameLabel.text = dataModel.person.name
-        surnameLabel.text = dataModel.person.surname
-        workLabel.text = dataModel.person.work
-        aboutMeLabel.text = dataModel.person.aboutMe
+        nameLabel.text = user.person.name
+        surnameLabel.text = user.person.surname
+        workLabel.text = user.person.work
+        aboutMeLabel.text = user.person.aboutMe
         
-        title = "\(dataModel.person.name) \(dataModel.person.surname)"
+        title = user.person.fullName
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let moreInfoVC = segue.destination as? MoreInfoViewController else { return }
-        moreInfoVC.imageName = dataModel.person.photo
+        moreInfoVC.user = user
     }
 }

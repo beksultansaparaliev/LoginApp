@@ -19,16 +19,27 @@ class LoginViewController: UIViewController, UINavigationControllerDelegate {
     //MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let tabBarController = segue.destination as? UITabBarController else { return }
+        guard let viewControllers = tabBarController.viewControllers else { return }
         
-        for viewController in tabBarController.children {
-            if let welcomeVC = viewController as? WelcomeViewController {
-                welcomeVC.dataModel = user
-            } else if let navigationVC = viewController as? UINavigationController {
+        viewControllers.forEach {
+            if let welcomeVC = $0 as? WelcomeViewController {
+                welcomeVC.user = user
+            } else if let navigationVC = $0 as? UINavigationController {
                 guard let aboutMeVC = navigationVC.topViewController as? AboutUserViewController else { return }
-                aboutMeVC.dataModel = user
+                aboutMeVC.user = user
             }
         }
     }
+    
+    //MARK: - for in loop for prepare method
+//        for viewController in viewControllers {
+//            if let welcomeVC = viewController as? WelcomeViewController {
+//                welcomeVC.dataModel = user
+//            } else if let navigationVC = viewController as? UINavigationController {
+//                guard let aboutMeVC = navigationVC.topViewController as? AboutUserViewController else { return }
+//                aboutMeVC.dataModel = user
+//            }
+//        }
     
     //MARK: - Method prepare with switch
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

@@ -9,14 +9,17 @@ import UIKit
 
 class MoreInfoViewController: UIViewController {
 
-    @IBOutlet var imageView: UIImageView!
+    @IBOutlet var imageView: UIImageView! {
+        didSet {
+            imageView.makeRounded()
+        }
+    }
     
-    var imageName: String!
+    var user: User!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        imageView.image = UIImage(named: imageName)
-        imageView.makeRounded()
+        imageView.image = UIImage(named: user.person.photo)
     }
 }
 
@@ -26,7 +29,7 @@ extension UIImageView {
         layer.borderWidth = 1
         layer.masksToBounds = false
         layer.borderColor = UIColor.black.cgColor
-        layer.cornerRadius = self.frame.height / 2
+        layer.cornerRadius = frame.height / 2
         clipsToBounds = true
     }
 }

@@ -11,7 +11,7 @@ class WelcomeViewController: UIViewController {
 
     @IBOutlet weak var welcomeLabel: UILabel!
     
-    var dataModel: User!
+    var user: User!
     
     private let primaryColor = UIColor(
         red: 210/255,
@@ -31,7 +31,7 @@ class WelcomeViewController: UIViewController {
             topColor: primaryColor,
             bottomColor: secondaryColor
         )
-        welcomeLabel.text = "Welcome \(dataModel.person.name)🐯!"
+        welcomeLabel.text = "Welcome \(user.person.name)🐯!"
     }
 }
 
