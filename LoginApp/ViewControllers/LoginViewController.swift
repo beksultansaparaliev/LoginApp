@@ -19,27 +19,41 @@ class LoginViewController: UIViewController, UINavigationControllerDelegate {
     //MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let tabBarController = segue.destination as? UITabBarController else { return }
-        guard let viewControllers = tabBarController.viewControllers else { return }
-
-        for viewController in viewControllers {
-            var childVC: UIViewController?
-
-            if let navigationVC = viewController as? UINavigationController {
-                childVC = navigationVC.topViewController
-            } else {
-                childVC = viewController
-            }
-
-            switch childVC {
-            case let viewController as WelcomeViewController:
-                viewController.dataModel = User.getUser()
-            case let viewController as AboutUserViewController:
-                viewController.dataModel = User.getUser()
-            default:
-                break
+        
+        for viewController in tabBarController.children {
+            if let welcomeVC = viewController as? WelcomeViewController {
+                welcomeVC.dataModel = user
+            } else if let navigationVC = viewController as? UINavigationController {
+                guard let aboutMeVC = navigationVC.topViewController as? AboutUserViewController else { return }
+                aboutMeVC.dataModel = user
             }
         }
     }
+    
+    //MARK: - Method prepare with switch
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        guard let tabBarController = segue.destination as? UITabBarController else { return }
+//        guard let viewControllers = tabBarController.viewControllers else { return }
+//
+//        for viewController in viewControllers {
+//            var childVC: UIViewController?
+//
+//            if let navigationVC = viewController as? UINavigationController {
+//                childVC = navigationVC.topViewController
+//            } else {
+//                childVC = viewController
+//            }
+//
+//            switch childVC {
+//            case let viewController as WelcomeViewController:
+//                viewController.dataModel = user
+//            case let viewController as AboutUserViewController:
+//                viewController.dataModel = user
+//            default:
+//                break
+//            }
+//        }
+//    }
     
     //MARK: - IBActions
     @IBAction func logInButtonPressed() {

@@ -23,7 +23,7 @@ class AboutUserViewController: UIViewController {
         workLabel.text = dataModel.person.work
         aboutMeLabel.text = dataModel.person.aboutMe
         
-        self.title = "\(dataModel.person.name) \(dataModel.person.surname)"
+        title = "\(dataModel.person.name) \(dataModel.person.surname)"
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
